@@ -1,11 +1,37 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Services/AuthProvider";
+import toast from "react-hot-toast";
 
 function SignUp() {
+  const { createNewUser } = useContext(AuthContext);
+  const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    const name = data?.name;
+    const email = data?.email;
+    const password = data?.password;
+    createNewUser(email, password)
+      .then((res) => {
+        console.log(res.user);
+        if (res.user) {
+          toast.success("Succesfully SignUp!");
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-lg border-2 p-8 rounded-2xl">
           <form
+            onSubmit={handleSubmit(onSubmit)}
             action="#"
             className="mb-0 mt-6 space-y-4 rounded-lg p-4"
           >
@@ -20,15 +46,17 @@ function SignUp() {
 
               <div className="relative">
                 <input
+                  {...register("name", { required: true })}
+                  name="name"
                   type="text"
                   className="w-full rounded-lg border outline-none focus:border-[#6c72ff] p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter Fullname"
                 />
-
-             
               </div>
               <div className="relative mt-4">
                 <input
+                  {...register("email", { required: true })}
+                  name="email"
                   type="email"
                   className="w-full rounded-lg border outline-none focus:border-[#6c72ff] p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter email"
@@ -60,6 +88,8 @@ function SignUp() {
 
               <div className="relative">
                 <input
+                  {...register("password", { required: true })}
+                  name="password"
                   type="password"
                   className="w-full rounded-lg border outline-none focus:border-[#6c72ff] p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter password"
