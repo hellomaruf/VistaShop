@@ -90,7 +90,7 @@ function SignIn() {
               No account?
               <Link
                 to={"/signup"}
-                className="underline text-[#6C72FF] font-semibold"
+                className="underline text-[#6C72FF] font-bold"
                 href="#"
               >
                 Sign up

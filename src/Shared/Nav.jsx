@@ -2,8 +2,13 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { TbHomeHeart } from "react-icons/tb";
 import { AiOutlineProduct } from "react-icons/ai";
+import { useContext } from "react";
+import { AuthContext } from "../Services/AuthProvider";
 
 function Nav() {
+  const { name } = useContext(AuthContext);
+  console.log(name);
+
   return (
     <div className="max-w-7xl mx-auto flex  justify-between items-center my-6">
       <div className="">
@@ -34,7 +39,10 @@ function Nav() {
             Products
           </NavLink>
         </div>
-        <Link to={'/signin'}  className="btn bg-[#6C72FF] text-white hover:bg-[#585eff]">
+        <Link
+          to={"/signin"}
+          className="btn bg-[#6C72FF] text-white hover:bg-[#585eff]"
+        >
           Sign In
         </Link>
       </div>
