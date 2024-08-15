@@ -33,8 +33,6 @@ function SignUp() {
     console.log(data);
     const name = data?.name;
     const photo = await ImageUpload(image);
-    console.log(photo);
-
     const email = data?.email;
     const password = data?.password;
     createNewUser(email, password)

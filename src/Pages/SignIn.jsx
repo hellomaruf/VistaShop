@@ -1,12 +1,37 @@
+import { useContext } from "react";
+import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "./../Services/AuthProvider";
+import toast from "react-hot-toast";
 
 function SignIn() {
+  const { signInUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    const email = data?.email;
+    const password = data?.password;
+    console.log(email, password);
+    signInUser(email, password).then((res) => {
+      console.log(res.user);
+      if (res.user) {
+        toast.success("Successfully Sign In!");
+        navigate("/");
+      }
+    });
+  };
+
   return (
     <div>
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-lg border-2 rounded-2xl p-8">
-          <form action="#" className="mb-0 mt-6 space-y-4 rounded-lg ">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            action="#"
+            className="mb-0 mt-6 space-y-4 rounded-lg "
+          >
             <p className="text-center text-xl font-medium">
               Sign in to your account
             </p>
@@ -18,6 +43,8 @@ function SignIn() {
 
               <div className="relative">
                 <input
+                  {...register("email", { required: true })}
+                  name="email"
                   type="email"
                   className="w-full rounded-lg border outline-none focus:border-[#6c72ff] p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter email"
@@ -49,6 +76,8 @@ function SignIn() {
 
               <div className="relative">
                 <input
+                  {...register("password", { required: true })}
+                  name="password"
                   type="password"
                   className="w-full rounded-lg border outline-none focus:border-[#6c72ff] p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter password"
