@@ -19,7 +19,7 @@ function SignIn() {
               <div className="relative">
                 <input
                   type="email"
-                  className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                  className="w-full rounded-lg border outline-none focus:border-[#6c72ff] p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter email"
                 />
 
@@ -50,7 +50,7 @@ function SignIn() {
               <div className="relative">
                 <input
                   type="password"
-                  className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                  className="w-full rounded-lg border outline-none focus:border-[#6c72ff] p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter password"
                 />
 
