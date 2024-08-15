@@ -8,7 +8,7 @@ function Nav() {
       </div>
       <div className="">
         <button className="btn bg-[#6C72FF] text-white hover:bg-[#585eff]">
-          SignI
+          Sign In
         </button>
       </div>
     </div>
