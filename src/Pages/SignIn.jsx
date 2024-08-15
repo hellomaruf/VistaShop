@@ -1,24 +1,13 @@
+import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 
 function SignIn() {
   return (
     <div>
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-lg">
-          <h1 className="text-center text-2xl font-bold text-[#6C72FF] sm:text-3xl">
-            Get started today
-          </h1>
-
-          <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati
-            sunt dolores deleniti inventore quaerat mollitia?
-          </p>
-
-          <form
-            action="#"
-            className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
-          >
-            <p className="text-center text-lg font-medium">
+        <div className="mx-auto max-w-lg border-2 rounded-2xl p-8">
+          <form action="#" className="mb-0 mt-6 space-y-4 rounded-lg ">
+            <p className="text-center text-xl font-medium">
               Sign in to your account
             </p>
 
@@ -99,11 +88,24 @@ function SignIn() {
 
             <p className="text-center text-sm text-gray-500">
               No account?
-              <Link to={'/signup'} className="underline text-[#6C72FF] font-semibold" href="#">
+              <Link
+                to={"/signup"}
+                className="underline text-[#6C72FF] font-semibold"
+                href="#"
+              >
                 Sign up
               </Link>
             </p>
           </form>
+          <div className="divider my-6">Or</div>
+          <div className="">
+            <button
+              type="submit"
+              className=" w-full flex  items-center  justify-center gap-2 rounded-lg  px-5 py-3 text-sm font-medium text-gray-800 bg-gray-100"
+            >
+              <FcGoogle className="text-2xl" /> Sign in With Google
+            </button>
+          </div>
         </div>
       </div>
     </div>
