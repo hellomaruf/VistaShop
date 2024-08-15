@@ -1,25 +1,48 @@
-import { useContext } from "react";
+import { useContext, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Services/AuthProvider";
 import toast from "react-hot-toast";
+import upload from "../assets/uploadImg.png";
+import { ImageUpload } from "../Utils/ImgUpload";
 
 function SignUp() {
-  const { createNewUser } = useContext(AuthContext);
+  // Update img functionality-------------------->
+  const [avatarURL, setAvatarURL] = useState(upload);
+  const [image, setImage] = useState(Object);
+  console.log(image);
+
+  const fileUploadRef = useRef();
+  const handleUploadImg = (e) => {
+    e.preventDefault();
+    fileUploadRef.current.click();
+  };
+  const handleDisplayUploadedImg = () => {
+    const uploadedFile = fileUploadRef.current.files[0];
+    const cachedURL = URL.createObjectURL(uploadedFile);
+    console.log(cachedURL, uploadedFile);
+    setAvatarURL(cachedURL);
+    setImage(uploadedFile);
+  };
+
+  const { createNewUser, updateUserProfile } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
     const name = data?.name;
+    const photo = await ImageUpload(image);
+    console.log(photo);
+
     const email = data?.email;
     const password = data?.password;
     createNewUser(email, password)
       .then((res) => {
-        console.log(res.user);
+        updateUserProfile(name, photo);
         if (res.user) {
-          toast.success("Succesfully SignUp!");
           navigate("/");
+          toast.success("Successfully SignUp!");
         }
       })
       .catch((error) => {
@@ -38,7 +61,21 @@ function SignUp() {
             <p className="text-center text-xl text-gray-900 font-medium">
               Sign Up to your account
             </p>
-
+            <div className=" mt-4 flex justify-center">
+              <button className="" onClick={handleUploadImg}>
+                <img
+                  className="w-24 rounded-full"
+                  src={avatarURL}
+                  alt="avatar"
+                />
+              </button>
+              <input
+                onChange={handleDisplayUploadedImg}
+                ref={fileUploadRef}
+                type="file"
+                className="hidden"
+              />
+            </div>
             <div>
               <label htmlFor="name" className="sr-only">
                 Name
