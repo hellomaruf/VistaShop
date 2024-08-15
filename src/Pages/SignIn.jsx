@@ -6,14 +6,13 @@ import { AuthContext } from "./../Services/AuthProvider";
 import toast from "react-hot-toast";
 
 function SignIn() {
-  const { signInUser } = useContext(AuthContext);
+  // Email and password Sign in------------------------->
+  const { signInUser, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
     const email = data?.email;
     const password = data?.password;
-    console.log(email, password);
     signInUser(email, password).then((res) => {
       console.log(res.user);
       if (res.user) {
@@ -21,6 +20,13 @@ function SignIn() {
         navigate("/");
       }
     });
+  };
+
+  // Google Sign in -------------------------->
+  const handleGoogleSignIn = () => {
+    signInWithGoogle();
+    navigate("/");
+    toast.success("Successfully Sign In!");
   };
 
   return (
@@ -129,6 +135,7 @@ function SignIn() {
           <div className="divider my-6">Or</div>
           <div className="">
             <button
+              onClick={handleGoogleSignIn}
               type="submit"
               className=" w-full flex  items-center  justify-center gap-2 rounded-lg  px-5 py-3 text-sm font-medium text-gray-800 bg-gray-100"
             >
