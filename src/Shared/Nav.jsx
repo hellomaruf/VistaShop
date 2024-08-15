@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { TbHomeHeart } from "react-icons/tb";
 import { AiOutlineProduct } from "react-icons/ai";
@@ -34,9 +34,9 @@ function Nav() {
             Products
           </NavLink>
         </div>
-        <button className="btn bg-[#6C72FF] text-white hover:bg-[#585eff]">
+        <Link to={'/signin'}  className="btn bg-[#6C72FF] text-white hover:bg-[#585eff]">
           Sign In
-        </button>
+        </Link>
       </div>
     </div>
   );
