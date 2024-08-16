@@ -2,6 +2,8 @@ import { Slider, styled } from "@material-ui/core";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { FaSortAmountDownAlt } from "react-icons/fa";
+import { IoFilter } from "react-icons/io5";
 import { MdDateRange } from "react-icons/md";
 import { TbBrandNexo, TbCategory } from "react-icons/tb";
 
@@ -13,6 +15,8 @@ function Products() {
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("");
+  const [sortOrder, setSortOrder] = useState("");
+  console.log(sortOrder);
 
   const CustomSlider = styled(Slider)({
     color: "#6c72ff", // This sets the color for both the track and thumb
@@ -69,6 +73,18 @@ function Products() {
       setFilterData(filtered);
     }
   };
+
+  // Sort the filtered data based on sortOrder
+  useEffect(() => {
+    if (sortOrder === "lowToHigh") {
+      const filtered = productData?.result?.sort((a, b) => a.price - b.price);
+      setFilterData(filtered);
+    }
+    if (sortOrder === "highToLow") {
+      const filtered = productData?.result?.sort((a, b) => b.price - a.price);
+      setFilterData(filtered);
+    }
+  }, [sortOrder, productData]);
 
   const handlePrevPage = () => {
     if (currentPage > 0) {
@@ -223,57 +239,70 @@ function Products() {
             </div>
           ))}
         </div>
-        <div className="col-span-1 ">
-          <div className=" space-y-4">
-            <div
-              className=""
-              style={
-                {
-                  // margin: "auto",
-                  // display: "block",
-                  // width: "fit-content",
-                }
-              }
+        <div className="col-span-1 bg-[#f4f4ff] p-4 rounded-xl h-[450px]">
+          <div className="">
+            <div className="flex items-center justify-between font-semibold text-sm mb-3 text-gray-500">
+              <h3>Filtering</h3>
+              <IoFilter className="font-semibold" />
+            </div>
+            <div className=" space-y-4">
+              <div className="">
+                <CustomSlider
+                  className="text-[#6c72ff] "
+                  value={value}
+                  onChange={rangeSelector}
+                  min={10}
+                  max={500}
+                  valueLabelDisplay="auto"
+                />
+                Range of Price is between {value[0]} /- and {value[1]} /-
+              </div>
+              <div className="flex items-center gap-3">
+                <select
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  value={selectedCategory}
+                  id="category"
+                  className="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
+                >
+                  <option value={""} selected>
+                    All Category
+                  </option>
+                  <option value="Tea">Tea</option>
+                  <option value="Milk">Milk</option>
+                  <option value="Oil">Oil</option>
+                  <option value="Rice">Rice</option>
+                </select>
+                <select
+                  id="brand"
+                  onChange={(e) => setSelectedBrand(e.target.value)}
+                  className="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
+                >
+                  <option value={""} selected>
+                    All Blands
+                  </option>
+                  <option value="Fresh">Fresh</option>
+                  <option value="Pran">Pran</option>
+                  <option value="Chashi">Chashi</option>
+                  <option value="Radhuni">Radhuni</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div className="">
+            <div className="flex items-center justify-between mt-6 font-semibold text-sm mb-3 text-gray-500">
+              <h3>Sorting</h3>
+              <FaSortAmountDownAlt />
+            </div>
+            <select
+              onChange={(e) => setSortOrder(e.target.value)}
+              id="category"
+              className="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
             >
-              <CustomSlider
-                className="text-[#6c72ff] "
-                value={value}
-                onChange={rangeSelector}
-                min={10}
-                max={500}
-                valueLabelDisplay="auto"
-              />
-              Range of Price is between {value[0]} /- and {value[1]} /-
-            </div>
-            <div className="flex items-center gap-3">
-              <select
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                value={selectedCategory}
-                id="category"
-                className="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
-              >
-                <option value={""} selected>
-                  All Category
-                </option>
-                <option value="Tea">Tea</option>
-                <option value="Milk">Milk</option>
-                <option value="Oil">Oil</option>
-                <option value="Rice">Rice</option>
-              </select>
-              <select
-                id="brand"
-                onChange={(e) => setSelectedBrand(e.target.value)}
-                className="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
-              >
-                <option value={""} selected>
-                  All Blands
-                </option>
-                <option value="Fresh">Fresh</option>
-                <option value="Pran">Pran</option>
-                <option value="Chashi">Chashi</option>
-                <option value="Radhuni">Radhuni</option>
-              </select>
-            </div>
+              <option value={""}>Sorting by Price</option>
+              <option value="highToLow">High to Low</option>
+              <option value="lowToHigh">Low to High</option>
+            </select>
           </div>
         </div>
       </div>
