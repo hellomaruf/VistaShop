@@ -161,7 +161,7 @@ function Products() {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
               fill="currentColor"
-              className="h-4 w-4 opacity-70"
+              className="h-4 w-4 opacity-70 "
             >
               <path
                 fillRule="evenodd"
@@ -172,7 +172,7 @@ function Products() {
           </label>
         </div>
       </div>
-      <div className="grid grid-cols-4 max-w-[1380px] mx-auto gap-6 my-10">
+      <div className="grid grid-cols-4 max-w-[1380px] mx-auto gap-6 my-6">
         <div className="col-span-3 grid grid-cols-3 gap-6">
           {products?.map((item, index) => (
             <div className="" key={index}>
@@ -248,14 +248,14 @@ function Products() {
             <div className=" space-y-4">
               <div className="">
                 <CustomSlider
-                  className="text-[#6c72ff] "
+                  className="text-[#6c72ff] text-sm"
                   value={value}
                   onChange={rangeSelector}
                   min={10}
                   max={500}
                   valueLabelDisplay="auto"
                 />
-                Range of Price is between {value[0]} /- and {value[1]} /-
+               <span className="text-sm"> Range of Price is between {value[0]} /- and {value[1]} /-</span>
               </div>
               <div className="flex items-center gap-3">
                 <select
