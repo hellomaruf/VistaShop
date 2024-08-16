@@ -11,6 +11,7 @@ function Products() {
   const [filterData, setFilterData] = useState([]);
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedBrand, setSelectedBrand] = useState("");
 
   // Fetch Data by Tanstack Query------------------------------>
   const { data: productData, refetch } = useQuery({
@@ -63,7 +64,6 @@ function Products() {
 
   // Filter by category--------------------------------->
   useEffect(() => {
-
     if (selectedCategory === "") {
       setFilterData(productData); // Show all data if no category is selected
     } else {
@@ -73,7 +73,19 @@ function Products() {
       setFilterData(filtered);
     }
   }, [selectedCategory, productData]);
-console.log(productData);
+  console.log(productData);
+
+  // Filter by Brand--------------------------------->
+  useEffect(() => {
+    if (selectedBrand === "") {
+      setFilterData(productData);
+    } else {
+      const filteredBrand = productData?.result?.filter(
+        (item) => item?.brandName === selectedBrand
+      );
+      setFilterData(filteredBrand);
+    }
+  }, [selectedBrand, productData]);
 
   useEffect(() => {
     if (filterData?.result) {
@@ -124,14 +136,17 @@ console.log(productData);
               <option value="Rice">Rice</option>
             </select>
             <select
-              id="category"
+              id="brand"
+              onChange={(e) => setSelectedBrand(e.target.value)}
               className="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
             >
-              <option selected>All Blands</option>
-              <option value="US">United States</option>
-              <option value="CA">Canada</option>
-              <option value="FR">France</option>
-              <option value="DE">Germany</option>
+              <option value={""} selected>
+                All Blands
+              </option>
+              <option value="Fresh">Fresh</option>
+              <option value="Pran">Pran</option>
+              <option value="Chashi">Chashi</option>
+              <option value="Radhuni">Radhuni</option>
             </select>
           </div>
         </div>
