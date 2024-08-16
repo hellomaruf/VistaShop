@@ -147,9 +147,9 @@ function Products() {
   console.log(products);
 
   return (
-    <div className="max-w-[1380px] mx-auto">
+    <div className="max-w-[1380px] mx-auto pt-[100px]">
       <div className="">
-        <div className="flex items-center justify-between">
+        <div className="">
           <label className="input max-w-lg input-bordered flex items-center gap-2">
             <input
               type="text"
@@ -178,12 +178,12 @@ function Products() {
             <div className="" key={index}>
               <a
                 href="#"
-                className="block rounded-lg p-4 shadow-sm shadow-indigo-100"
+                className="block rounded-lg p-4  bg-white"
               >
                 <img
                   alt=""
-                  src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                  className="h-56 w-full rounded-md object-cover"
+                  src="https://i.ibb.co/MfQZ0vT/radhuni-turmeric-holud-powder-200-gm.webp"
+                  className="h-56 w-full p-6 rounded-md object-cover"
                 />
 
                 <div className="mt-2">
@@ -203,9 +203,9 @@ function Products() {
                     </div>
                   </dl>
 
-                  <div className="mt-6 flex items-center justify-between gap-8 text-xs ">
+                  <div className="mt-6 flex items-center justify-between gap-4 text-xs ">
                     <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-                      <TbCategory className="text-xl" />
+                      <TbCategory className="text-xl text-[#6c72ff]" />
 
                       <div className="mt-1.5 sm:mt-0">
                         <p className="text-gray-500">Category</p>
@@ -215,7 +215,7 @@ function Products() {
                     </div>
 
                     <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-                      <TbBrandNexo className="text-xl" />
+                      <TbBrandNexo className="text-xl text-[#6c72ff]" />
 
                       <div className="mt-1.5 sm:mt-0">
                         <p className="text-gray-500">Brand</p>
@@ -225,7 +225,7 @@ function Products() {
                     </div>
 
                     <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-                      <MdDateRange className="text-xl" />
+                      <MdDateRange className="text-xl text-[#6c72ff]" />
 
                       <div className="mt-1.5 sm:mt-0">
                         <p className="text-gray-500">Date</p>
@@ -239,7 +239,7 @@ function Products() {
             </div>
           ))}
         </div>
-        <div className="col-span-1 bg-[#f4f4ff] p-4 rounded-xl h-[450px]">
+        <div className="col-span-1  p-4 bg-white rounded-xl h-[450px]">
           <div className="">
             <div className="flex items-center justify-between font-semibold text-sm mb-3 text-gray-500">
               <h3>Filtering</h3>

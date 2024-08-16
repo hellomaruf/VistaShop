@@ -9,7 +9,9 @@ function Nav() {
 
 
   return (
-    <div className="max-w-[1380px] mx-auto flex  justify-between items-center my-6">
+    <div className="fixed w-full bg-white backdrop-blur-2xl bg-opacity-25">
+
+    <div className="max-w-[1380px] mx-auto flex  justify-between items-center py-4 px-6 ">
       <div className="">
         <img src={logo} alt="" />
       </div>
@@ -45,6 +47,7 @@ function Nav() {
           Sign In
         </Link>
       </div>
+    </div>
     </div>
   );
 }
