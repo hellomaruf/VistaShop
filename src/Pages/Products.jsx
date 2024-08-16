@@ -1,23 +1,52 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useState } from "react";
 import { MdDateRange } from "react-icons/md";
 import { TbBrandNexo, TbCategory } from "react-icons/tb";
 
 function Products() {
-  const { data: productData } = useQuery({
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const { data: productData, refetch } = useQuery({
     queryKey: ["productData"],
     queryFn: async () => {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_LOCALHOST_URL}/productsData`
+        `${
+          import.meta.env.VITE_LOCALHOST_URL
+        }/productsData?page=${currentPage}&size=${itemsPerPage}`
       );
       return data;
     },
   });
-  console.log(productData);
 
+  // pagination functionality------------------------------->
+  const count = productData?.count;
+  const numberOfPage = Math.ceil(count / itemsPerPage);
+  const pages = [];
+  for (let i = 0; i < numberOfPage; i++) {
+    pages.push(i);
+    refetch();
+  }
+
+  const handlePrevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+      refetch();
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < pages?.length) {
+      setCurrentPage(currentPage + 1);
+      refetch();
+    }
+  };
   return (
-    <div className="grid grid-cols-4 max-w-[1380px] mx-auto gap-6 my-16">
-      {productData?.map((item, index) => (
+    <div className="">
+
+    <div className="grid grid-cols-4 max-w-[1380px] mx-auto gap-4 my-16">
+      {productData?.result?.map((item, index) => (
         <div className="" key={index}>
           <a
             href="#"
@@ -44,7 +73,7 @@ function Products() {
                 </div>
               </dl>
 
-              <div className="mt-6 flex items-center gap-8 text-xs">
+              <div className="mt-6 flex items-center justify-between gap-8 text-xs ">
                 <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
                   <TbCategory className="text-xl" />
 
@@ -79,6 +108,28 @@ function Products() {
           </a>
         </div>
       ))}
+    </div>
+      <div className="text-center my-7">
+        <button onClick={handlePrevPage} className="btn  mr-3">
+          Prev
+        </button>
+        {pages?.map((page, idx) => (
+          <button
+            onClick={() => setCurrentPage(page)}
+            className={
+              page === currentPage
+                ? "btn mr-3 rounded-full w-10  bg-[#6c72ff] hover:bg-[#6c72ff] text-white"
+                : "btn rounded-full mr-3 w-10 "
+            }
+            key={idx}
+          >
+            {page}
+          </button>
+        ))}
+        <button onClick={handleNextPage} className="btn  mr-3">
+          Next
+        </button>
+      </div>
     </div>
   );
 }
