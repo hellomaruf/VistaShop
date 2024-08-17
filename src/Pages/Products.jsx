@@ -16,6 +16,7 @@ function Products() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("");
   const [sortOrder, setSortOrder] = useState("");
+  const [sortDate, setSortDate] = useState("");
   console.log(sortOrder);
 
   const CustomSlider = styled(Slider)({
@@ -74,7 +75,24 @@ function Products() {
     }
   };
 
-  // Sort the filtered data based on sortOrder
+  // Sorting by newest and oldest date--------------------------->
+  useEffect(() => {
+    if (sortDate === "newest") {
+      const filtered = productData?.result?.sort(
+        (a, b) => new Date(b.creationDate) - new Date(a.creationDate)
+      );
+      setFilterData(filtered);
+    }
+    if (sortDate === "oldest") {
+      const filtered = productData?.result?.sort(
+        (a, b) => new Date(a.creationDate) - new Date(b.creationDate)
+      );
+      setFilterData(filtered);
+    }
+  }, [productData, sortDate]);
+
+  
+  // Sort the filtered data based on sortOrder-------------------------->
   useEffect(() => {
     if (sortOrder === "lowToHigh") {
       const filtered = productData?.result?.sort((a, b) => a.price - b.price);
@@ -176,10 +194,7 @@ function Products() {
         <div className="col-span-3 grid grid-cols-3 gap-6">
           {products?.map((item, index) => (
             <div className="" key={index}>
-              <a
-                href="#"
-                className="block rounded-lg p-4  bg-white"
-              >
+              <a href="#" className="block rounded-lg p-4  bg-white">
                 <img
                   alt=""
                   src="https://i.ibb.co/MfQZ0vT/radhuni-turmeric-holud-powder-200-gm.webp"
@@ -255,7 +270,10 @@ function Products() {
                   max={500}
                   valueLabelDisplay="auto"
                 />
-               <span className="text-sm"> Range of Price is between {value[0]} /- and {value[1]} /-</span>
+                <span className="text-sm">
+                  {" "}
+                  Range of Price is between {value[0]} /- and {value[1]} /-
+                </span>
               </div>
               <div className="flex items-center gap-3">
                 <select
@@ -302,6 +320,16 @@ function Products() {
               <option value={""}>Sorting by Price</option>
               <option value="highToLow">High to Low</option>
               <option value="lowToHigh">Low to High</option>
+            </select>
+
+            <select
+              onChange={(e) => setSortDate(e.target.value)}
+              id="date"
+              className="bg-gray-50 border mt-4  border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
+            >
+              <option value={""}>Date Added</option>
+              <option value="newest">New Added Products</option>
+              <option value="oldest">Oldest Added Products</option>
             </select>
           </div>
         </div>
