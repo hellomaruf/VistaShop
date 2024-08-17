@@ -49,7 +49,7 @@ function SignUp() {
   };
   return (
     <div>
-      <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 pt-28">
+      <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 pt-36">
         <div className="mx-auto max-w-lg border-2 p-8 rounded-2xl bg-white">
           <form
             onSubmit={handleSubmit(onSubmit)}
