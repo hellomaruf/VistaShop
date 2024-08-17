@@ -43,7 +43,6 @@ function Products() {
   });
   console.log(productData);
   console.log(currentPage, itemsPerPage);
-  
 
   // pagination functionality------------------------------->
   const count = productData?.count;
@@ -170,7 +169,7 @@ function Products() {
   console.log(products);
 
   return (
-    <div className="max-w-[1380px] mx-auto pt-[100px]">
+    <div className="max-w-[1380px] lg:mx-auto pt-[150px] lg:pt-[100px] mx-5">
       <div className="">
         <div className="">
           <label className="input max-w-lg input-bordered flex items-center gap-2">
@@ -195,15 +194,15 @@ function Products() {
           </label>
         </div>
       </div>
-      <div className="grid grid-cols-4 max-w-[1380px] mx-auto gap-6 my-6">
-        <div className="col-span-3 grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-4 max-w-[1380px] mx-auto  my-6">
+        <div className="col-span-3 order-2 lg:order-1 mt-6 lg:mt-0 grid grid-cols-1 lg:grid-cols-2  xl:grid-cols-3 gap-6">
           {products?.map((item, index) => (
-            <div className="" key={index}>
+            <div className=" " key={index}>
               <a href="#" className="block rounded-lg p-4  bg-white">
                 <img
                   alt=""
                   src={item?.productImage}
-                  className="h-56 w-full p-6 rounded-md object-cover"
+                  className="h-72 w-full p-8 rounded-md object-cover"
                 />
 
                 <div className="mt-2">
@@ -223,7 +222,7 @@ function Products() {
                     </div>
                   </dl>
 
-                  <div className="mt-6 flex items-center justify-between gap-4 text-xs ">
+                  <div className="mt-6 flex  items-center justify-between gap-4 text-xs ">
                     <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
                       <TbCategory className="text-xl text-[#6c72ff]" />
 
@@ -259,7 +258,7 @@ function Products() {
             </div>
           ))}
         </div>
-        <div className="col-span-1  p-4 bg-white rounded-xl h-[450px]">
+        <div className="col-span-1 order-1 lg:order-1  p-4 bg-white rounded-xl h-[450px] lg:ml-6">
           <div className="">
             <div className="flex items-center justify-between font-semibold text-sm mb-3 text-gray-500">
               <h3>Filtering</h3>
@@ -341,7 +340,7 @@ function Products() {
         </div>
       </div>
       <div className="text-center my-7">
-        <button onClick={handlePrevPage} className="btn  mr-3">
+        <button onClick={handlePrevPage} className="btn btn-sm  mr-3">
           Prev
         </button>
         {pages?.map((page, idx) => (
@@ -349,15 +348,15 @@ function Products() {
             onClick={() => setCurrentPage(page)}
             className={
               page === currentPage
-                ? "btn mr-3 rounded-full w-10  bg-[#6c72ff] hover:bg-[#6c72ff] text-white"
-                : "btn rounded-full mr-3 w-10 "
+                ? "btn btn-sm mr-2 rounded-full w-10  bg-[#6c72ff] hover:bg-[#6c72ff] text-white"
+                : "btn btn-sm rounded-full mr-2 w-10 "
             }
             key={idx}
           >
             {page}
           </button>
         ))}
-        <button onClick={handleNextPage} className="btn  mr-3">
+        <button onClick={handleNextPage} className="btn btn-sm mr-3">
           Next
         </button>
       </div>

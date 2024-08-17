@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD03lzH19LgPonIGiNsOXJ_4RSavOCfzbc",
-  authDomain: "vista-shop.firebaseapp.com",
-  projectId: "vista-shop",
-  storageBucket: "vista-shop.appspot.com",
-  messagingSenderId: "918218784105",
-  appId: "1:918218784105:web:4db642b9c7bacd8cc0d1f8",
-  measurementId: "G-PJTKWL83G7",
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
+  measurementId: import.meta.env.VITE_measurementId,
 };
 
 // Initialize Firebase
