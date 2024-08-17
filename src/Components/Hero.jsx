@@ -5,13 +5,12 @@ function Hero() {
         <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-[600px] lg:items-center">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="bg-gradient-to-r from-[#6c72ff]  to-[#494fff] bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl">
-              Understand User Flow.
-              <span className="sm:block"> Increase Conversion. </span>
+            Your Trusted Online Store for Everything You Need, When You Need It.
+              
             </h1>
 
             <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt
-              illo tenetur fuga ducimus numquam ea!
+            Bringing You Quality Products at Affordable Prices, Delivered Right to Your Doorstep.
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">
