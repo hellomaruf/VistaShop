@@ -17,7 +17,7 @@ function Products() {
   const [selectedBrand, setSelectedBrand] = useState("");
   const [sortOrder, setSortOrder] = useState("");
   const [sortDate, setSortDate] = useState("");
-  console.log(sortOrder);
+  console.log(products);
 
   const CustomSlider = styled(Slider)({
     color: "#6c72ff", // This sets the color for both the track and thumb
@@ -37,10 +37,13 @@ function Products() {
           import.meta.env.VITE_LOCALHOST_URL
         }/productsData?page=${currentPage}&size=${itemsPerPage}`
       );
+      // refetch()
       return data;
     },
   });
   console.log(productData);
+  console.log(currentPage, itemsPerPage);
+  
 
   // pagination functionality------------------------------->
   const count = productData?.count;
@@ -91,7 +94,6 @@ function Products() {
     }
   }, [productData, sortDate]);
 
-  
   // Sort the filtered data based on sortOrder-------------------------->
   useEffect(() => {
     if (sortOrder === "lowToHigh") {
@@ -141,6 +143,7 @@ function Products() {
       setFilterData(filtered);
     }
   }, [selectedCategory, productData]);
+
   console.log(productData);
 
   // Filter by Brand--------------------------------->
@@ -158,10 +161,12 @@ function Products() {
   useEffect(() => {
     if (filterData?.result) {
       setProducts(filterData?.result);
+      refetch();
     } else if (filterData) {
       setProducts(filterData);
+      refetch();
     }
-  }, [filterData?.result, filterData]);
+  }, [filterData?.result, filterData, refetch]);
   console.log(products);
 
   return (
@@ -197,7 +202,7 @@ function Products() {
               <a href="#" className="block rounded-lg p-4  bg-white">
                 <img
                   alt=""
-                  src="https://i.ibb.co/MfQZ0vT/radhuni-turmeric-holud-powder-200-gm.webp"
+                  src={item?.productImage}
                   className="h-56 w-full p-6 rounded-md object-cover"
                 />
 
@@ -302,6 +307,7 @@ function Products() {
                   <option value="Pran">Pran</option>
                   <option value="Chashi">Chashi</option>
                   <option value="Radhuni">Radhuni</option>
+                  <option value="Teer">Teer</option>
                 </select>
               </div>
             </div>
